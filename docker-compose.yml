@@ -1,0 +1,25 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      APP_NAME: PhotoStock
+      APP_ENV: local
+      APP_KEY: base64:Giv7tA32wPeBDlpG/InTxj/7++KrQdvSmTkt1KBNC8w=
+      APP_DEBUG: "true"
+      APP_URL: http://localhost:8000
+      DB_CONNECTION: sqlite
+      DB_DATABASE: /var/www/html/storage/app/database.sqlite
+      SESSION_DRIVER: database
+      CACHE_STORE: database
+      QUEUE_CONNECTION: database
+      FILESYSTEM_DISK: local
+    volumes:
+      - photostock-storage:/var/www/html/storage/app
+    restart: unless-stopped
+
+volumes:
+  photostock-storage:
